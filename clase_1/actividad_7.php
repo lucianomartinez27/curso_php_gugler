@@ -1,39 +1,39 @@
 <?php
 
-$primer_numero = 100;
+$primerNumero = 100;
 
-$segundo_numero = 25;
+$segundoNumero = 25;
 
 
 // SUMA
 
-$resultado_suma = $primer_numero+$segundo_numero;
+$resultadoSuma = $primerNumero+$segundoNumero;
 echo '<ul>';
-echo "<li>Suma de $primer_numero + $segundo_numero es igual a: $resultado_suma</li>";
+echo "<li>Suma de $primerNumero + $segundoNumero es igual a: $resultadoSuma</li>";
 
 // RESTA
 
-$resultado_resta = $primer_numero-$segundo_numero;
+$resultadoResta = $primerNumero-$segundoNumero;
 
-echo "<li>Resta de $primer_numero - $segundo_numero es igual a: $resultado_resta</li>";
+echo "<li>Resta de $primerNumero - $segundoNumero es igual a: $resultadoResta</li>";
 
 // MULTIPLICACION
 
-$resultado_multiplicar = $primer_numero*$segundo_numero;
+$resultadoMultiplicar = $primerNumero*$segundoNumero;
 
-echo "<li>Multiplicación de $primer_numero * $segundo_numero es igual a: $resultado_multiplicar</li>";
+echo "<li>Multiplicación de $primerNumero * $segundoNumero es igual a: $resultadoMultiplicar</li>";
 
 // DIVISION
 
-$resultado_dividir = $primer_numero/$segundo_numero;
+$resultadoDividir = $primerNumero/$segundoNumero;
 
-echo "<li>División de $primer_numero / $segundo_numero es igual a: $resultado_dividir</li>";
+echo "<li>División de $primerNumero / $segundoNumero es igual a: $resultadoDividir</li>";
 
 // RESTO DE LA DIVISION
 
-$resultado_resto = $primer_numero%$segundo_numero;
+$resultadoResto = $primerNumero%$segundoNumero;
 
-echo "<li>Resto de la división de $primer_numero % $segundo_numero es igual a: $resultado_resto</li>";
+echo "<li>Resto de la división de $primerNumero % $segundoNumero es igual a: $resultadoResto</li>";
 
 echo '</ul>'
 
