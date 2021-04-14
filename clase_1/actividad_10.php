@@ -37,7 +37,7 @@ echo "<br>";
 
 // el operador xor necesita que sólo uno de los operadores sea true
 
-if ($verdadero xor $ver){
+if ($verdadero xor $falso){
     echo "<b>OPERADOR XOR</b><br>";
     echo "(true xor false == true) & (false xor true == true)";
     echo "<br>";
