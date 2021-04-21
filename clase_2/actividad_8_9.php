@@ -32,7 +32,19 @@ echo "100 / 3 = ".division(100, 3);
 
 
 /*9) - Editar el script PHP del punto anterior y agregue una función que permita incrementar
-el valor de una variable pasada como parámetro por referencia. Dentro del mismo script deberá */
+el valor de una variable pasada como parámetro por referencia. Dentro del mismo script deberá 
+utilizar la función y mostrar el resultado por pantalla.*/
+
+
+$valor= 10;
+echo "<br>'Valor' antes de incrementarlo: ".$valor;
+
+function incrementar_valor(&$valor_a_incrementar){
+    $valor_a_incrementar++;
+}
+
+incrementar_valor($valor);
+echo "<br>'Valor' después de incrementarlo: ".$valor;
 
 
 
