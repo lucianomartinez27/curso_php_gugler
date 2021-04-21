@@ -15,4 +15,12 @@ foreach ($dias_semana as $dia){
 estructura del arreglo $dias_semana.*/
 
 print_r($dias_semana);
+
+/*- Edite el script del punto 4 y ordene el arreglo de forma ascendente y muestre en
+pantalla el contenido del mismo.*/
+echo '<br>Dias de la semana ordenados alfabéticamente en forma ascendente: <br>';
+
+sort($dias_semana);
+print_r($dias_semana);
+
 ?>
