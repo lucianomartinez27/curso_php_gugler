@@ -11,5 +11,8 @@ foreach ($dias_semana as $dia){
     echo $dia.'<br>';
 }
 
+/*4) - Edite el script del punto 3 y agregue la función print_r() para ver el contenido y la
+estructura del arreglo $dias_semana.*/
 
+print_r($dias_semana);
 ?>
