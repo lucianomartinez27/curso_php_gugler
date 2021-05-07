@@ -1,11 +1,10 @@
 <?php
 
-/*– Realice una nueva página Web que permita ingresar los datos de usuario y
-contraseña. Luego cree un script en PHP para que reciba los datos por POST y se muestren los
-datos. */
+/* Edite el script PHP anterior pero recibiendo los datos por método REQUEST y muestre
+los mismos por pantalla. */
 
-echo $_POST['usuario'];
+echo $_REQUEST['usuario'];
 echo "<br>";
-echo $_POST['contrasenia'];
+echo $_REQUEST['contrasenia'];
 
 ?>
