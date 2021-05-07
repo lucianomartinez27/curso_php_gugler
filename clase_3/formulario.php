@@ -21,6 +21,8 @@ Luego cree un script PHP que permita obtener los datos del formulario por métod
 muestre los mismos por pantalla. */
 
 
-var_dump($_GET);
+foreach($_GET as $clave => $dato){
+    echo $clave.": ".$dato."<br>";
+}
 
 ?>
