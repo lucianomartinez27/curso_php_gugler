@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <header class="card bg-light">
-        <h1>Sistema de Gestión de Usuarios</h1>
-    </header>
+    <?php
+    include_once("../includes/header.php")
+    ?>
     <fieldset class="screen-center" id="form__input">
         <legend> Ingrese sus datos</legend>
             <form action="form_login.php" method="post">
@@ -26,7 +26,9 @@
                 <input class="button secondary" type="button" value="Ingresar">
             </form>
         </fieldset>
-    <footer class="is-center bg-light"><p>Todos los derechos reservados</p></footer>
-</body>
+        <?php
+        include_once("../includes/footer.php")
+        ?>
+        </body>
 
 </html>
