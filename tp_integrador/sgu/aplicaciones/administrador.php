@@ -26,10 +26,10 @@
             </div>
             <div class="col is-marginless">
                 <div class="row">
-                    <a href="/to-home">Inicio </a>
+                    <a href="../login/login.php">Inicio </a>
                 </div>
                 <div class="row">
-                    <a class="text-error" href="exit">Salir</a>
+                    <a class="text-error" href="../login/login.php">Salir</a>
                 </div>
             </div>
 
@@ -39,8 +39,7 @@
     </div>
 
 
-    <div class="screen-center">
-
+    <div class="is-center" id="admin-options">
 
         <div class="row">
             <div class="col tag">

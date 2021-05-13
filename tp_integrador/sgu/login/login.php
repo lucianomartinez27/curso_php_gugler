@@ -15,17 +15,20 @@
     <?php
     include_once("../includes/header.php")
     ?>
-    <fieldset class="screen-center" id="form__input">
-        <legend> Ingrese sus datos</legend>
-            <form action="form_login.php" method="post">
-                
-                <p><label for="user">Usuario</label></p>
-                <input  type="text" name="user" id="user">
-                <p><label for="password ">Clave:</label> </p>
-                <input type="password" name="password" id="password "><br>
-                <input class="button secondary" type="button" value="Ingresar">
-            </form>
-        </fieldset>
+    <div class="is-center">
+
+        <fieldset class="is-center" id="form__input">
+            <legend> Ingrese sus datos</legend>
+                <form action="form_login.php" method="post">
+                    
+                    <p><label for="user">Usuario</label></p>
+                    <input  type="text" name="user" id="user">
+                    <p><label for="password ">Clave:</label> </p>
+                    <input type="password" name="password" id="password "><br>
+                    <input class="button secondary" type="button" value="Ingresar">
+                </form>
+            </fieldset>
+    </div>
         <?php
         include_once("../includes/footer.php")
         ?>

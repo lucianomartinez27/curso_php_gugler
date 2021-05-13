@@ -1,22 +1,26 @@
-.screen-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.screen-center p {
-    margin: 1em;
-    text-align: center;
-}
-
-.screen-center input {
-    margin-bottom: 1em;
-}
 
 footer {
-    position:absolute;
+    position:fixed !important;
+    margin-top: 3rem;
     bottom:0;
     width:100%;
-    height:50px; 
+    height:40px; 
+ }
+
+fieldset {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+ .material-icons {
+     font-size: 100px;
+ }
+
+ /*Este margin lo utilizo en el formulario agregar_persona para que
+    el footer no me tape el botón de Volver*/
+ .bottom {
+     margin-top: 5rem;
+ }
+
+ #admin-options{
+     margin-top: 3rem;
  }
