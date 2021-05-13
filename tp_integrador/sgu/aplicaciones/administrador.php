@@ -47,7 +47,7 @@
                     <p class="material-icons is-marginless" style="font-size: 150px;">groups</p>
                 </div>
                 <div class="col">
-                    <a href="./agregar_usuario.php" class="is-center" style="font-size: 20px;">Usuarios</a>
+                    <a href="../usuario/agregar_usuario.php" class="is-center" style="font-size: 20px;">Usuarios</a>
                 </div>
 
             </div>
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="./agregar_persona.php" class="is-center" style="font-size: 20px;">Personas</a>
+                    <a href="../usuario/agregar_persona.php" class="is-center" style="font-size: 20px;">Personas</a>
                 </div>
             </div>
 

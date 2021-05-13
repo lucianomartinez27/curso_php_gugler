@@ -31,7 +31,7 @@ class Persona {
     private $telefonoMovil;
     private $correoElectronico;
 
-    public function __construct(){
+    private function __construct(){
             $tipoDocumento = 'DNI';
             $numeroDocumento = 00000000;
             $apellidos = 'Martínez';

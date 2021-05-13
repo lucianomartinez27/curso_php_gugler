@@ -57,7 +57,7 @@
                     <input class="button success" type="button" value="Agregar">
                 </form>
             </fieldset>
-            <a class="is-center button" href="administrador.php">Volver</a>
+            <a class="is-center button" href="../aplicaciones/administrador.php">Volver</a>
     </div>
     <div class="bottom">
     <?php

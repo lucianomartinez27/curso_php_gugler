@@ -47,7 +47,7 @@
         
                 </form>
             </fieldset>
-        <a class=" is-center button" href="administrador.php">Volver</a>
+        <a class=" is-center button" href="../aplicaciones/administrador.php">Volver</a>
     </div>
     <?php
     include_once("../includes/footer.php")
