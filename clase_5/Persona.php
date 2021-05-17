@@ -21,56 +21,67 @@ Métodos
 Dentro del mismo script cree un objeto que use todos los métodos que se definieron.*/
 class Persona {
 
-    private $tipoDocumento;
-    private $numeroDocumento;
-    private $apellidos;
-    private $nombres;
-    private $domicilio;
-    private $telefono;
-    private $telefonoTrabajo;
-    private $telefonoMovil;
-    private $correoElectronico;
+    private $_tipoDocumento;
+    private $_numeroDocumento;
+    private $_apellidos;
+    private $_nombres;
+    private $_domicilio;
+    private $_telefono;
+    private $_telefonoTrabajo;
+    private $_telefonoMovil;
+    private $_correoElectronico;
+    private $_hermanos = array();
 
     private function __construct(){
-            $tipoDocumento = 'DNI';
-            $numeroDocumento = 00000000;
-            $apellidos = 'Martínez';
-            $nombres = 'Luciano';
-            $domicilio = 'Calle Falsa 123';
-            $telefono = 3434000000;
-            $telefonoTrabajo = 0000000000;
-            $telefonoMovil = 3434000000;
-            $correoElectronico = 'luciano@gmail.com';
+            $_tipoDocumento = 'DNI';
+            $_numeroDocumento = 00000000;
+            $_apellidos = 'Martínez';
+            $_nombres = 'Luciano';
+            $_domicilio = 'Calle Falsa 123';
+            $_telefono = 3434000000;
+            $_telefonoTrabajo = 0000000000;
+            $_telefonoMovil = 3434000000;
+            $_correoElectronico = 'luciano@gmail.com';
     }
 
 
     public function cambiarDomicilio($nuevoDomicilio){
-            $domicilio = $nuevoDomicilio;
+            $_domicilio = $nuevoDomicilio;
     }
 
     public function cambiarNumeroTelefono($nuevoTelefono){
-        $telefono  = $nuevoTelefono;
+        $_telefono  = $nuevoTelefono;
     }
 
     public function cambiarNumeroTelefonoMovil($nuevoTelefonoMovil){
-        $telefonoMovil= $nuevoTelefonoMovil;
+        $_telefonoMovil= $nuevoTelefonoMovil;
         
     }
 
     public function cambiarNumeroTelefonoTrabajo($nuevoTelefonoTrabajo){
-        $telefonoTrabajo = $nuevoTelefonoTrabajo;
+        $_telefonoTrabajo = $nuevoTelefonoTrabajo;
         
     }
 
     public function cambiarCorreoElectronico($nuevoCorreoElectronico){
-        $correoElectronico = $nuevoCorreoElectronico;
+        $_correoElectronico = $nuevoCorreoElectronico;
         
     }
 
+    public function agregarHermano(Persona $hermano){
+        $_hermanos[] = $hermano;
+    }
+
+    public function __toString()
+    {
+        return $this -> _apellidos." ".$this -> _nombres;
+    }
+
+    
         
     
 }
-$persona = new Persona;
+$persona = new Persona();
 
 $persona -> cambiarDomicilio("Avenida Siempre Viva");
 $persona -> cambiarNumeroTelefono(3434343434);
@@ -78,4 +89,7 @@ $persona -> cambiarNumeroTelefonoMovil(343434341);
 $persona -> cambiarNumeroTelefonoTrabajo(0303030);
 $persona -> cambiarCorreoElectronico('lucianomartinez27@gmail.com');
 
+$hermano = new Persona();
+
+$persona -> agregarHermano($hermano);
 ?>
