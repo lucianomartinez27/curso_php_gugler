@@ -3,12 +3,14 @@
 // Clase que ayuda a obtener y actualizar datos de la base de datos.
 
 class AsistenteSQL {
-    private $_dbh;
+    static $_dbh;
 
     function __construct($dbname)
     {
         try {
-            $this -> _dbh = new PDO("mysql:dbname=" .$dbname. ";host=127.0.0.1;port=3306", 'root');
+            if (is_null(self::$_dbh)){
+                self:: $_dbh = new PDO("mysql:dbname=" .$dbname. ";host=127.0.0.1;port=3306", 'root');
+            }
         }
         catch (PDOException $e){
             echo 'Conexión fallida: '. $e -> getMessage();
@@ -153,7 +155,7 @@ class AsistenteSQL {
 
     public function conectarDB($dbname){
         try {
-            $this -> _dbh = new PDO("mysql:dbname=" .$dbname. ";host=127.0.0.1;port=3306", 'root');
+            self::$_dbh = new PDO("mysql:dbname=" .$dbname. ";host=127.0.0.1;port=3306", 'root');
         }
         catch (PDOException $e){
             echo 'Conexión fallida: '. $e -> getMessage();
@@ -161,7 +163,7 @@ class AsistenteSQL {
     }
     
     public function desconectarDB(){
-        $this -> _dbh = null;
+        self:: $_dbh = null;
     }
 
 
