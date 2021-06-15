@@ -1,10 +1,15 @@
+
+<?php
+include_once('../includes/php/generadorHTMLUsuarios.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
     <!-- Aquí importo un framework de css muy sencillo -->
-    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+    <link rel="stylesheet" href="https://unpkg.com/chota">
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,23 +19,26 @@
 
 <body>
     <?php
-    include_once("../includes/header.php")
+    include_once("../../includes/header.php");
     ?>
-    
+
     <div class="container">
     
             <fieldset class="is-center" id="form__input">
                 <legend>Agregar usuario</legend>
-                <form action="form_login.php" method="post">
+                <form action="../includes/php/abm/alta_usuario.php" method="post">
         
                     <label for="person">Identificación de persona:</label>
                     <select name="person" id="">
-                        <option value="some_person">Persona de ejemplo</option>
+                        <?php
+                        $generadorHTMLUsuarios -> generarOpcionesDeSeleccionDePersonas();
+                        ?>
                     </select>
                     <label for="type_user">Tipo usuario:</label>
                     <select name="type_user" id="">
-                        <option value="admin">Admin</option>
-                        <option value="user">Usuario</option>
+                    <?php
+                    $generadorHTMLUsuarios -> generarOpcionesDeTipoDeUsuario()
+                    ?>
                     </select>
                     <label for="user">Nombre de usuario:</label>
                     <input type="text" name="user" id="">
@@ -43,15 +51,16 @@
                     <input type="radio" name="enabled" value="N" id=""> NO
                     <br>
                     <input type="reset" value="Limpiar" class="button error">
-                    <input class="button success" type="button" value="Agregar">
+                    <input class="button success" type="submit" value="Agregar">
         
                 </form>
             </fieldset>
-        <a class=" is-center button" href="../aplicaciones/administrador.php">Volver</a>
+        <a class=" is-center button" href="../../aplicaciones/administrador.php">Volver</a>
     </div>
     <?php
-    include_once("../includes/footer.php")
+    include_once("../../includes/footer.php")
     ?>
 </body>
 
 </html>
+

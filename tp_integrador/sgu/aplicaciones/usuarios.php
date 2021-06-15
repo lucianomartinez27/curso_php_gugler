@@ -17,6 +17,7 @@
     <?php
     include_once("../includes/header.php");
     include_once("../includes/cabecera_usuario.php")
+
     ?>
 
 
@@ -24,22 +25,22 @@
 
         <div class="row">
             <div class="col tag">
-                <div class="col">
+                <div class="col text-center">
                     <p class="material-icons is-marginless" style="font-size: 150px;">groups</p>
                 </div>
-                <div class="col ">
-                    <a href="../usuario/listado_usuarios.php" class="is-center" style="font-size: 20px;">Usuarios</a>
+                <div class="col text-center">
+                    <a href="../usuario/datos_personales.php" class="is-full-width" style="font-size: 20px;">Datos personales</a>
                 </div>
 
             </div>
 
             <div class="col tag">
-                <div class="col">
+                <div class="col text-center">
                     <p class="material-icons is-marginless" style="font-size: 150px;">people_alt</p>
                 </div>
 
                 <div class="col text-center">
-                    <a href="../persona/listado_personas.php" class="is-center" style="font-size: 20px;">Personas</a>
+                    <a href="../usuario/datos_de_usuario.php" class="is-full-width" style="font-size: 20px;">Datos de Usuarios</a>
                 </div>
             </div>
 
