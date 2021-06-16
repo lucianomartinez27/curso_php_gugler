@@ -19,28 +19,34 @@ include_once('./includes/php/generadorHTMLUsuarios.php');
 <body>
     <?php
     include_once("../includes/header.php");
-    include_once("../includes/cabecera_usuario.php")
-    ?>
-    <h1>Listado de Usuarios:</h1>
-    <div class="row is-full-width">
-        <div class="col-10">
-            <div class="row">
-                <div class="col"><b>Nombre de usuario</b></div>
-                <div class="col"><b>Tipo de usuario</b></div>
-                <div class="col"><b>Habilitado</b></div>
-            </div>
-        </div>
-        <div class="col"></div>
-    </div>
-        <?php
-         $generadorHTMLUsuarios -> generarListaDeUsuarios();
-        ?>
-    <div class="row">
-        <a class=" is-center button" href="../aplicaciones/administrador.php">Volver</a>
-        <a class=" is-center button" href="../usuario/acciones/agregar_usuario.php">Agregar usuario</a>
-    </div>
+    include_once("../includes/cabecera_usuario.php");
 
-    <?php
+    echo new H([new Texto('Listado de Usuarios')], 2);
+    echo new Fila([
+        new ColumnaExpandida([
+            new Fila([
+                new Columna([
+                    new Negrita([new Texto('Nombre de usuario')])
+                ]),
+                new Columna([
+                    new Negrita([new Texto('Tipo de usuario')])
+                ]),
+                new Columna([
+                    new Negrita([new Texto('Habilitado')])
+                ]),
+            ])
+        ], 10),
+        // Columna utilizada para el margen
+        new Columna([])
+    ]);
+
+    $generadorHTMLUsuarios->generarListaDeUsuarios();
+
+    echo new Fila([
+        new Boton('../aplicaciones/administrador.php', 'Volver'),
+        new Boton('./acciones/agregar_usuario.php', 'Agregar usuario')
+    ]);
+ 
     include_once("../includes/footer.php")
     ?>
 </body>

@@ -13,25 +13,26 @@
 
 <body>
     <?php
-    include_once("../includes/header.php")
-    ?>
-    <div class="is-center">
+    include_once("../includes/header.php");
 
-        <fieldset class="is-center" id="form__input">
-            <legend> Ingrese sus datos</legend>
-                <form action="form_login.php" method="post">
-                    
-                    <p><label for="user">Usuario</label></p>
-                    <input  type="text" name="user" id="user">
-                    <p><label for="password ">Clave:</label> </p>
-                    <input type="password" name="password" id="password "><br>
-                    <input class="button secondary" type="button" value="Ingresar">
-                </form>
-            </fieldset>
-    </div>
-        <?php
-        include_once("../includes/footer.php")
-        ?>
-        </body>
+    echo new Centrado([
+        new Fieldset([
+            new Legend('Ingrese sus datos'),
+            new Form([
+                new Parrafo([
+                    new Label('user', 'Usuario')]),
+                    new InputText('user', 'user'),
+                new Parrafo([
+                    new Label('password', 'Contraseña')]),
+                    new InputPassword('password', 'password'),
+                    new Padding(5),
+                new InputBoton('Ingresar')
+
+            ], '', 'POST')
+        ], 'Ingrese sus datos')]);
+
+    include_once("../includes/footer.php")
+    ?>
+</body>
 
 </html>

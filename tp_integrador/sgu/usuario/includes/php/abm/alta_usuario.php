@@ -6,7 +6,6 @@ $idTipoUsuario = $_POST['type_user'];
 $nombreUsuario = $_POST['user'];
 $password = $_POST['password'];
 $habilitado = $_POST['enabled'];
-
 $asistenteDB = new AsistenteSQL('sgu');
 
 
@@ -31,31 +30,11 @@ $asistenteDB = new AsistenteSQL('sgu');
     <?php
     include_once('../../../../includes/header.php');
     include_once('../../../../includes/cabecera_usuario.php');
+    $mensaje = $asistenteDB->agregarUsuario($idPersona, $idTipoUsuario, $nombreUsuario, $password, $habilitado) ?
+        new Texto('Todo salió bien. Usuario agregado correctamente.') :
+        new Texto('Hubo un error con los datos, por favor inténtalo nuevamente');
+    echo new MensajeAbm($mensaje, '../../../listado_usuarios.php')
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
-
-                if (!$asistenteDB->agregarUsuario($idPersona, $idTipoUsuario, $nombreUsuario, $password, $habilitado)) {
-                    echo 'Hubo un error con los datos, por favor inténtalo nuevamente';
-                } else {
-                    echo 'Todo salió bien. Usuario agregado correctamente.';
-                }
-
-
-                ?>
-            </div>
-        </div>
-        <br>
-        <div class="row is-center">
-            <a class="is-center button" href="../../../listado_usuarios.php">Volver</a>
-        </div>
-    </div>
 </body>
 
 </html>

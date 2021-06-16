@@ -70,6 +70,10 @@ class SGUDataBase{
         return $this -> _dataBase;
     }
 
+    public function desconectarDB(){
+         $this -> _dbh = null;
+    }
+
     
 
 }
@@ -86,5 +90,5 @@ $db -> agregarTipoDeUsuario('usuario', 'usuario normal');
 $db -> agregarTipoDeDocumento('DNI', 'DOCUMENTO NACIONAL DE IDENTIDAD');
 $db -> agregarTipoDeDocumento('LE', 'LIBRETA ENROLAMIENTO');
 $db -> agregarTipoDeDocumento('LC', 'LIBRETA CÍVICA');
-
+$db -> desconectarDB();
 ?>

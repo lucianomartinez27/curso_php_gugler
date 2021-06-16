@@ -1,6 +1,6 @@
 <?php
 
-include_once(dirname(__FILE__).'/../../../includes/php/conexion.php');
+include_once(dirname(__FILE__) . '/../../../includes/php/conexion.php');
 
 // Clase que nos ayuda a reutilizar codigo HTML para la vista de usuarios
 
@@ -12,12 +12,12 @@ class GeneradorHTMLUsuarios
     {
         $this->asistenteDB = new AsistenteSQL('sgu');
     }
-    
+
     public function generarOpcionesDeTipoDeUsuario()
     {
         $tiposUsuarioQuery = $this->asistenteDB->obtenerTiposDeUsuarios();
         foreach ($tiposUsuarioQuery as $tipoUsuario) {
-            echo "<option value=" . $tipoUsuario->idTipoUsuario . ">" . $tipoUsuario->descripcion . "</option>\n";
+            echo new Opcion($tipoUsuario->idTipoUsuario, $tipoUsuario->descripcion);
         }
     }
 
@@ -26,7 +26,7 @@ class GeneradorHTMLUsuarios
         $query = $this->asistenteDB->obtenerDatosDePersonas();
 
         foreach ($query as $columna) {
-            echo "<option value=" . $columna->idPersona . ">" . $columna->apellido . " " . $columna->nombres . "</option>\n";
+            echo new Opcion($columna->idPersona, $columna->apellido . " " . $columna->nombres);
         }
     }
 
@@ -36,43 +36,40 @@ class GeneradorHTMLUsuarios
         $consulta = $this->asistenteDB->obtenerDatosDeUsuarioPorId($idUsuario);
 
         foreach ($consulta as $usuario) {
-            echo "Identificado con: " . $usuario->nombres . " " . $usuario->apellido . "<br>";
-            echo "Nombre de usuario: " . $usuario->username . "<br>";
-            echo "Tipo: " . $usuario->descripcion . "<br>";
-            echo "Habilitado: " . $usuario->habilitado . "<br>";
+            echo "Identificado con: " . $usuario->nombres . " " . $usuario->apellido . new SaltoLinea();
+            echo "Nombre de usuario: " . $usuario->username . new SaltoLinea();
+            echo "Tipo: " . $usuario->descripcion . new SaltoLinea();
+            echo "Habilitado: " . $usuario->habilitado . new SaltoLinea();
         }
     }
 
 
     public function generarListaDeUsuarios()
     {
-        $usuarios = $this -> asistenteDB -> obtenerDatosDeUsuarios();
+        $usuarios = $this->asistenteDB->obtenerDatosDeUsuarios();
         foreach ($usuarios as $usuario) {
-            echo "
-            <hr class='is-marginless is-paddingless'>
-            <div class='row is-full-width'>
-            <div class='col-10'>
-                <div class='row'>
-                    <div class='col'>" . $usuario -> username . "</div>
-                    <div class='col'>" . $usuario -> descripcion . "</div>
-                    <div class='col'>" . $usuario -> habilitado . "</div>
-                </div>
-                
-            </div>
-            <div class='col'>
-            <div class='row'>
-                <div class='col'><a href='./acciones/ver_usuario.php?id=" . $usuario -> idUsuario . "'>Ver</a></div>
-                <div class='col'><a href='./acciones/modificar_usuario.php?id=" . $usuario -> idUsuario . "'>Modificar</a></div>
-                <div class='col'><a href='./acciones/borrar_usuario.php?id=" . $usuario -> idUsuario . "'>Borrar</a></div>
-            </div>
-            </div>
-            </div>
-            
-            ";
+
+            echo "<hr class='is-marginless is-paddingless'>";
+            echo new Fila([
+                new ColumnaExpandida([
+                    new Fila([
+                        new Columna([new Texto($usuario->username)]),
+                        new Columna([new Texto($usuario->descripcion)]),
+                        new Columna([new Texto($usuario->habilitado)]),
+
+                    ])
+                ], 10),
+                new Columna([
+                    new Fila([
+                        new Columna([new Link("./acciones/ver_usuario.php?id=" . $usuario->idUsuario, 'Ver')]),
+                        new Columna([new Link("./acciones/modificar_usuario.php?id=" . $usuario->idUsuario, 'Modificar')]),
+                        new Columna([new Link("./acciones/borrar_usuario.php?id=" . $usuario->idUsuario, 'Borrar')]),
+
+                    ])
+                ])
+            ]);
         }
-
     }
-
 }
 
 

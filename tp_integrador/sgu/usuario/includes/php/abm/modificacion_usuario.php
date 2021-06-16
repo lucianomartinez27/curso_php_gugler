@@ -1,5 +1,7 @@
 <?php
 include_once('../../../../includes/php/conexion.php');
+include_once('../../../../includes/mensaje_abm.php');
+
 
 $idPersona = $_POST['person'];
 $idTipoDeUsuario = $_POST['type_user'];
@@ -31,37 +33,11 @@ if (!isset($_GET['id'])) {
     <?php
     include_once('../../../../includes/header.php');
     include_once('../../../../includes/cabecera_usuario.php');
+    $mensaje = $asistenteDB->actualizarUsuario($idUsuario, $idPersona, $idTipoDeUsuario, $habilitado) ?
+        new Texto("Usuario modificado correctamente") :
+        new Texto("Hubo un problema al modificar el usuario. Por favor, intentelo nuevamente.");
+    echo new MensajeAbm($mensaje, '../../../listado_usuarios.php');
+    $asistenteDB->desconectarDB();
+
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
-
-                if ($asistenteDB->actualizarUsuario($idUsuario, $idPersona, $idTipoDeUsuario, $habilitado)) {
-                    echo "Usuario modificado correctamente";
-                } else {
-                    echo "Hubo un problema al modificar el usuario. Por favor, intentelo nuevamente.";
-                }
-                ?>
-            </div>
-        </div>
-        <br>
-        <div class="row is-center">
-            <a class="is-center button" href="../../../listado_usuarios.php">Volver</a>
-        </div>
-    </div>
-
-    </p>
-    </div>
 </body>
-
-</html>
-
-<?php
-
-$asistenteDB -> desconectarDB();
-?>

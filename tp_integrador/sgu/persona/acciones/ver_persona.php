@@ -1,5 +1,6 @@
 <?php
 include_once('../includes/php/generadorHTMLPersonas.php');
+include_once('../../includes/mensaje_abm.php');
 // redirigimos en caso de que no se especifique un id
 if (!isset($_GET['id'])){
     header('Location: ./listado_personas.php');
@@ -25,27 +26,13 @@ if (!isset($_GET['id'])){
     <?php
     include_once('../../includes/header.php');
     include_once('../../includes/cabecera_usuario.php');
+    $tarjeta = $generadorHTMLPersonas -> generarTarjetaDeIdentificacionDePersona($_GET['id']);
+    echo new MensajeAbm(new Division($tarjeta), "../listado_personas.php")
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
-                $generadorHTMLPersonas -> generarTarjetaDeIdentificacionDePersona($_GET['id']);
-                ?>
-            </div>
-        </div>
-        <br>
-        <div class="row is-center">
-            <a class="is-center button" href="../listado_personas.php">Volver</a>
-        </div>
-    </div>
-    <div class="bottom">
+    
     <?php
     include_once('../../includes/footer.php');
+    echo new MiFooter; 
     ?>
     </div>
 </body>

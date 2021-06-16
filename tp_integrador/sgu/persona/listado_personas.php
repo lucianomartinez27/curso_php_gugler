@@ -19,31 +19,29 @@ include_once('./includes/php/generadorHTMLPersonas.php');
 <body>
     <?php
     include_once("../includes/header.php");
-    include_once("../includes/cabecera_usuario.php")
-    ?>
-    <h1>Listado de Personas:</h1>
-    <div class="row is-full-width">
-        <div class="col-10">
-            <div class="row">
-                <div class="col"><b>Nombre</b></div>
-                <div class="col"><b>Apellido</b></div>
-                <div class="col"><b>Sexo</b></div>
-                <div class="col"><b>Documento</b></div>
-                <div class="col"><b>Email</b></div>
-            </div>
-        </div>
-        <div class="col"></div>
-    </div>
-        <?php
-         $generadorHTMLPersonas -> generarListaDePersonas();
-        ?>
-    <div class="row">
-        <a class=" is-center button" href="../aplicaciones/administrador.php">Volver</a>
-        <a class=" is-center button" href="../persona/acciones/agregar_persona.php">Agregar persona</a>
-    </div>
+    include_once("../includes/cabecera_usuario.php");
 
-    <?php
-    include_once("../includes/footer.php")
+    echo new H([new Texto('Listado de Personas:')], 2);
+    
+    echo new Fila([
+        new ColumnaExpandida([
+            new Fila([
+                new Columna([new Negrita([new Texto("Nombre")])]),
+                new Columna([new Negrita([new Texto("Apellido")])]),
+                new Columna([new Negrita([new Texto("Sexo")])]),
+                new Columna([new Negrita([new Texto("Documento")])]),
+                new Columna([new Negrita([new Texto("Email")])]),
+            ])], 10),
+            //Esta columna es usada para ajustar el margen
+        new Columna([])]);
+         $generadorHTMLPersonas -> generarListaDePersonas();
+
+         echo new Fila([new Boton('../aplicaciones/administrador.php', 'Volver'),
+                        new Boton('../persona/acciones/agregar_persona.php', 'Agregar persona'),]);
+
+
+    include_once("../includes/footer.php");
+    echo new MiFooter; 
     ?>
 </body>
 

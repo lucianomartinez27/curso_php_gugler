@@ -1,11 +1,12 @@
 <?php
 
 include_once('../../../../includes/php/conexion.php');
+include_once('../../../../includes/mensaje_abm.php');
 
 $asistenteDB;
 if (!isset($_GET['id'])) {
     header('Location: ../../../listado_personas.php');
-}else {
+} else {
     $idPersona = $_GET['id'];
 }
 
@@ -30,39 +31,23 @@ if (!isset($_GET['id'])) {
     <?php
     include_once('../../../../includes/header.php');
     include_once('../../../../includes/cabecera_usuario.php');
+
+    $mensaje = $asistenteDB->borrarPersona($idPersona) ?
+        new Texto('Usuario eliminado correctamente.')
+        : new Centrado([
+            new Texto('Hubo un error al eliminar la persona.'),
+            new SaltoLinea(), new Texto('Posiblemente haya usuarios que dependan de ésta persona'),
+            new SaltoLinea(), new Texto('Soluciónelo e inténtelo nuevamente.')
+        ]);
+    echo new MensajeAbm($mensaje, "../../../listado_personas.php")
+
+
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
 
-                if (!$asistenteDB->borrarPersona($idPersona)) {
-                    echo 'Hubo un error al eliminar la persona.
-                    <br>Posiblemente haya usuarios que dependan de ésta persona<br>
-                    Soluciónelo e inténtelo nuevamente.';
-                } else {
-                    echo 'Usuario eliminado correctamente.';
-                }
-
-                ?>
-            </div>
-        </div>
-        <br>
-        <div class="row is-center">
-            <a class="is-center button" href="../../../listado_personas.php">Volver</a>
-        </div>
-    </div>
-
-    </p>
-    </div>
 </body>
 
 </html>
 
 <?php
-$asistenteDB -> desconectarDB();
+$asistenteDB->desconectarDB();
 ?>

@@ -1,5 +1,6 @@
 <?php
 // Aquí utilizo la función dirname ya que tuve problemas con el relative path
+
 include_once(dirname(__FILE__).'/../../../includes/php/conexion.php');
 
 // Clase que nos ayuda a reutilizar codigo HTML para la vista de personas
@@ -16,10 +17,10 @@ class GeneradorHTMLPersonas
 
     public function generarOpcionesDeSeleccionDePersonas()
     {
-        $query = $this->asistenteDB->obtenerDatosDePersonas();
+        $personas = $this->asistenteDB->obtenerDatosDePersonas();
 
-        foreach ($query as $columna) {
-            echo "<option value=" . $columna->idPersona . ">" . $columna->apellido . " " . $columna->nombres . "</option>\n";
+        foreach ($personas as $persona) {
+           echo new Opcion($persona->idPersona, $persona->apellido . " " . $persona->nombres);
         }
     }
 
@@ -27,21 +28,32 @@ class GeneradorHTMLPersonas
     {
 
         $personas = $this->asistenteDB->obtenerDatosDePersonaPorId($idPersona);
-
+        $tarjeta = array();
         foreach ($personas as $persona) {
-            echo "Nombre y apellido: " . $persona->nombres . " " . $persona->apellido . "<br>";
-            echo "Sexo: " . $persona->sexo . "<br>";
-            echo "Email: " . $persona->email . "<br>";
-            echo "Fecha nacimiento: " . $persona->fechaNacimiento . "<br>";
-            echo "Telefono: " . $persona->telefono . "<br>";
-            echo "Movil: " . $persona->telefonoMovil . "<br>";
-            echo "Domicilio: " . $persona->domicilio . "<br>";
-            echo "Localidad: " . $persona->localidad . "<br>";
-            echo "Provincia: " . $persona->pais . "<br>";
-            echo "Pais: " . $persona->email . "<br>";
-            
-            echo "Documento: " . $persona->numeroDocumento . "<br>";
+            $tarjeta[] = new Texto("Nombre y apellido: " . $persona->nombres . " " . $persona->apellido);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Sexo: " . $persona->sexo );
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Email: " . $persona->email);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Fecha nacimiento: " . $persona->fechaNacimiento);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Telefono: " . $persona->telefono);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Movil: " . $persona->telefonoMovil);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Domicilio: " . $persona->domicilio );
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Localidad: " . $persona->localidad );
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Provincia: " . $persona->pais);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Pais: " . $persona->email );
+            $tarjeta[] = new SaltoLinea();            
+            $tarjeta[] = new Texto("Documento: " . $persona->numeroDocumento );
+            $tarjeta[]= new SaltoLinea();
         }
+        return $tarjeta;
     }
 
 
@@ -49,29 +61,23 @@ class GeneradorHTMLPersonas
     {
         $personas = $this -> asistenteDB -> obtenerDatosDePersonas();
         foreach ($personas as $persona) {
-            echo "
-            <hr class='is-marginless is-paddingless'>
-            <div class='row is-full-width'>
-            <div class='col-10'>
-                <div class='row'>
-                    <div class='col'>" . $persona -> nombres . "</div>
-                    <div class='col'>" . $persona -> apellido . "</div>
-                    <div class='col'>" . $persona -> sexo . "</div>
-                    <div class='col'>" . $persona -> numeroDocumento . "</div>
-                    <div class='col'>" . $persona -> email . "</div>
-                </div>
-                
-            </div>
-            <div class='col'>
-            <div class='row'>
-                <div class='col'><a href='./acciones/ver_persona.php?id=" . $persona -> idPersona . "'>Ver</a></div>
-                <div class='col'><a href='./acciones/modificar_persona.php?id=" . $persona -> idPersona . "'>Modificar</a></div>
-                <div class='col'><a href='./acciones/borrar_persona.php?id=" . $persona -> idPersona . "'>Borrar</a></div>
-            </div>
-            </div>
-            </div>
+            echo new Fila([
+                    new ColumnaExpandida([
+                        new Fila([
+                            new Columna([new Texto($persona -> nombres)]),
+                            new Columna([new Texto($persona -> apellido)]),
+                            new Columna([new Texto($persona -> sexo)]),
+                            new Columna([new Texto($persona -> numeroDocumento)]),
+                            new Columna([new Texto($persona -> email)])]),], 10),
+                    new Columna([
+                        new Fila([
+                            new Columna([new Link("./acciones/ver_persona.php?id=" . $persona -> idPersona . "'", 'Ver')]),
+                            new Columna([new Link("./acciones/modificar_persona.php?id=" . $persona -> idPersona . "'", 'Modificar')]),
+                            new Columna([new Link("./acciones/borrar_persona.php?id=" . $persona -> idPersona . "'", 'Borrar')])
+
+            ])]) ]);
+
             
-            ";
         }
 
     }

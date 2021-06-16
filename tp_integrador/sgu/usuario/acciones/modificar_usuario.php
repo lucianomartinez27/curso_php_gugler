@@ -68,7 +68,8 @@ if (!isset($_GET['id'])) {
         <a class=" is-center button" href="../listado_usuarios.php">Volver</a>
     </div>
     <?php
-    include_once("../../includes/footer.php")
+    include_once("../../includes/footer.php");
+    echo new MiFooter;
     ?>
 </body>
 

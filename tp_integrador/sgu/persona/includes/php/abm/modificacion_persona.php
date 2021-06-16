@@ -1,6 +1,7 @@
 <?php
 
 include_once('../../../../includes/php/conexion.php');
+include_once '../../../../includes/mensaje_abm.php';
 
 $tipoDocumento = trim($_POST['type_doc']);
 $numeroDocumento = trim($_POST['document_number']);
@@ -19,7 +20,7 @@ $pais = trim($_POST['country']);
 
 if (!isset($_GET['id'])) {
     header('Location: ../../../listar_usuarios.php');
-}else {
+} else {
     $idPersona = $_GET['id'];
 }
 
@@ -46,37 +47,30 @@ if (!isset($_GET['id'])) {
     include_once('../../../../includes/header.php');
     include_once('../../../../includes/cabecera_usuario.php');
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
+    <?php
+    $mensaje = new Texto($asistenteDB->actualizarPersona(
+        $idPersona,
+        $nombres,
+        $apellido,
+        $tipoDocumento,
+        $numeroDocumento,
+        $fechaNacimiento,
+        $sexo,
+        $telefono,
+        $movil,
+        $email,
+        $domicilio,
+        $localidad,
+        $provincia,
+        $pais
+    ) ?
+        "Usuario modificado correctamente":
+        "Hubo un problema al modificar el usuario. Por favor, intentelo nuevamente.");
+    echo new MensajeAbm($mensaje, "../../../listado_personas.php")
+    ?>
 
-                if ($asistenteDB->actualizarPersona($idPersona, $nombres, $apellido, $tipoDocumento, $numeroDocumento,
-                $fechaNacimiento, $sexo, $telefono, $movil, $email, $domicilio, $localidad, $provincia, $pais)) {
-                    echo "Usuario modificado correctamente";
-                } else {
-                    echo "Hubo un problema al modificar el usuario. Por favor, intentelo nuevamente.";
-                }
-                ?>
-            </div>
-        </div>
-        <br>
-        <div class="row is-center">
-            <a class="is-center button" href="../../../listado_personas.php">Volver</a>
-        </div>
-    </div>
 
-    </p>
-    </div>
-</body>
+<?php
 
-</html>
-
-<?php 
-
-$asistenteDB -> desconectarDB();
+$asistenteDB->desconectarDB();
 ?>

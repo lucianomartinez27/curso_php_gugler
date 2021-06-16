@@ -1,6 +1,8 @@
 <?php
 
 include_once('../../../../includes/php/conexion.php');
+include_once('../../../../includes/mensaje_abm.php');
+
 
 $asistenteDB = new AsistenteSQL('sgu');
 $idUsuario = $_GET['id'];
@@ -27,33 +29,12 @@ $idUsuario = $_GET['id'];
     <?php
     include_once('../../../../includes/header.php');
     include_once('../../../../includes/cabecera_usuario.php');
+    $mensaje = $asistenteDB->borrarUsuario($idUsuario) ?
+        new Texto('Usuario eliminado correctamente.') :
+        new Texto('Hubo un error al eliminar el usuario, por favor inténtelo nuevamente');
+    echo new MensajeAbm($mensaje, '../../../listado_usuarios.php');
+    $asistenteDB -> desconectarDB();
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
-
-                if (!$asistenteDB->borrarUsuario($idUsuario)) {
-                    echo 'Hubo un error al eliminar el usuario, por favor inténtelo nuevamente';
-                } else {
-                    echo 'Usuario eliminado correctamente.';
-                }
-
-                ?>
-            </div>
-        </div>
-        <br>
-        <div class="row is-center">
-            <a class="is-center button" href="../../../listado_usuarios.php">Volver</a>
-        </div>
-    </div>
-
-    </p>
-    </div>
 </body>
 
 </html>

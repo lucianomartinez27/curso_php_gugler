@@ -1,6 +1,8 @@
 <?php
 
 include_once('../../../../includes/php/conexion.php');
+include_once '../../../../includes/mensaje_abm.php';
+
 
 $tipoDocumento = trim($_POST['type_doc']);
 $numeroDocumento = trim($_POST['document_number']);
@@ -38,42 +40,27 @@ $pais = trim($_POST['country']);
     include_once("../../../../includes/header.php");
     include_once("../../../../includes/cabecera_usuario.php")
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
-                if ($asistenteDB->agregarPersona(
-                    $tipoDocumento,
-                    $numeroDocumento,
-                    $apellido,
-                    $nombres,
-                    $fechaNacimiento,
-                    $sexo,
-                    $movil,
-                    $telefono,
-                    $email,
-                    $domicilio,
-                    $provincia,
-                    $localidad,
-                    $pais
-                )){
-                echo "<p>Persona agregada correctamente</p>";
-                }else{
-                    echo "<p>Hubo un problema al agregar la persona, por favor inténtelo de nuevo.</p>";
-                }
+    <?php
+    $mensaje = new Texto($asistenteDB->agregarPersona(
+        $tipoDocumento,
+        $numeroDocumento,
+        $apellido,
+        $nombres,
+        $fechaNacimiento,
+        $sexo,
+        $movil,
+        $telefono,
+        $email,
+        $domicilio,
+        $provincia,
+        $localidad,
+        $pais
+    ) ? "Persona agregada correctamente" : "Hubo un problema al agregar la persona, por favor inténtelo de nuevo.");
 
-                ?>
-            </div>
-        </div>
-        <br>
-        <div class="row is-center">
-            <a class="is-center button" href="../../../acciones/agregar_persona.php">Volver</a>
-        </div>
-    </div>
+    echo new MensajeAbm($mensaje,'../../../acciones/agregar_persona.php')
+    
+    ?>
+
     <?php
     include_once("../../../../includes/footer.php")
     ?>
@@ -83,5 +70,5 @@ $pais = trim($_POST['country']);
 
 <?php
 
-$asistenteDB -> desconectarDB();
+$asistenteDB->desconectarDB();
 ?>
