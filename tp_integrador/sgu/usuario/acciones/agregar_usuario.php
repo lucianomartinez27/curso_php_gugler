@@ -1,6 +1,8 @@
 
 <?php
 include_once('../includes/php/generadorHTMLUsuarios.php');
+include_once("../../includes/footer.php")
+
 ?>
 
 <!DOCTYPE html>
@@ -20,45 +22,25 @@ include_once('../includes/php/generadorHTMLUsuarios.php');
 <body>
     <?php
     include_once("../../includes/header.php");
+
+    echo new Division([
+        new Fieldset([
+            new Legend('Agregar usuario'),
+            new Form([
+                new Label('person', 'Identificación de persona'),new Select('person', $generadorHTMLUsuarios -> generarOpcionesDeSeleccionDePersonas()),
+                new Label('type_user', 'Tipo usuario'), new Select('type_user',$generadorHTMLUsuarios -> generarOpcionesDeTipoDeUsuario() ),
+                new Label('user', 'Nombre de usuario'), new InputText('user'),
+                new Label('password', 'Clave'), new InputPassword('password', 'password'),
+                new Label('enabled', 'Habilitado:'), new SaltoLinea,
+                new Texto('SI: '),new InputRadio('S', 'enabled'),new Texto('NO: '), new InputRadio('N', 'enabled'), new SaltoLinea,
+                new Input('', '', 'reset', 'Limpiar'),
+                new Input('','', 'submit', 'Agregar')   ],
+                
+                '../includes/php/abm/alta_usuario.php' )])]);
+    echo new Centrado([new Boton("../../aplicaciones/administrador.php", 'Volver')])
     ?>
 
-    <div class="container">
-    
-            <fieldset class="is-center" id="form__input">
-                <legend>Agregar usuario</legend>
-                <form action="../includes/php/abm/alta_usuario.php" method="post">
-        
-                    <label for="person">Identificación de persona:</label>
-                    <select name="person" id="">
-                        <?php
-                        $generadorHTMLUsuarios -> generarOpcionesDeSeleccionDePersonas();
-                        ?>
-                    </select>
-                    <label for="type_user">Tipo usuario:</label>
-                    <select name="type_user" id="">
-                    <?php
-                    $generadorHTMLUsuarios -> generarOpcionesDeTipoDeUsuario()
-                    ?>
-                    </select>
-                    <label for="user">Nombre de usuario:</label>
-                    <input type="text" name="user" id="">
-        
-                    <label for="password ">Clave:</label>
-                    <input type="password" name="password" id="password "><br>
-        
-                    <label for="enabled">Habilitado: </label>
-                    <input type="radio" name="enabled" value="S" id=""> SI
-                    <input type="radio" name="enabled" value="N" id=""> NO
-                    <br>
-                    <input type="reset" value="Limpiar" class="button error">
-                    <input class="button success" type="submit" value="Agregar">
-        
-                </form>
-            </fieldset>
-        <a class=" is-center button" href="../../aplicaciones/administrador.php">Volver</a>
-    </div>
     <?php
-    include_once("../../includes/footer.php")
     ?>
 </body>
 

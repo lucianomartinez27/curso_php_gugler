@@ -2,6 +2,7 @@
 
 include_once('../../../../includes/php/conexion.php');
 include_once '../../../../includes/mensaje_abm.php';
+include_once("../../../../includes/footer.php");
 
 
 $tipoDocumento = trim($_POST['type_doc']);
@@ -57,12 +58,8 @@ $pais = trim($_POST['country']);
         $pais
     ) ? "Persona agregada correctamente" : "Hubo un problema al agregar la persona, por favor inténtelo de nuevo.");
 
-    echo new MensajeAbm($mensaje,'../../../acciones/agregar_persona.php')
-    
-    ?>
-
-    <?php
-    include_once("../../../../includes/footer.php")
+    echo new MensajeAbm($mensaje,'../../../acciones/agregar_persona.php');
+    echo new MiFooter;
     ?>
 </body>
 

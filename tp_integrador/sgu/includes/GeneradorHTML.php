@@ -326,13 +326,14 @@ class Label extends EtiquetaHTML
 
 class Input extends EtiquetaHTML
 {
-    public function __construct($nombre = '', $id = '', $tipo = '', $valor = '')
+    public function __construct($nombre ='', $id='', $tipo='', $valor='')
     {
         parent::__construct('input');
-        $this->agregar_atributo('type', $tipo);
-        $this->agregar_atributo('value', $valor);
-        $this->agregar_atributo('name', $nombre);
-        $this->agregar_atributo('id', $id);
+        empty($nombre) ? : $this->agregar_atributo('name', $nombre);
+        empty($id) ? : $this->agregar_atributo('id', $id);
+        empty($tipo) ? : $this->agregar_atributo('type', $tipo);
+        empty($valor) ? : $this->agregar_atributo('value', $valor);
+
     }
 }
 
@@ -346,7 +347,7 @@ class InputText extends Input
 }
 class InputPassword extends Input
 {
-    public function __construct($nombre, $id)
+    public function __construct($nombre, $id='')
     {
         parent::__construct($nombre, $id);
         $this->agregar_atributo('type', 'password');

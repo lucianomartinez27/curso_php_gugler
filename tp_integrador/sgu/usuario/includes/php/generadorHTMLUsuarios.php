@@ -16,31 +16,40 @@ class GeneradorHTMLUsuarios
     public function generarOpcionesDeTipoDeUsuario()
     {
         $tiposUsuarioQuery = $this->asistenteDB->obtenerTiposDeUsuarios();
+        $opciones = array();
         foreach ($tiposUsuarioQuery as $tipoUsuario) {
-            echo new Opcion($tipoUsuario->idTipoUsuario, $tipoUsuario->descripcion);
+            $opciones[] =  new Opcion($tipoUsuario->idTipoUsuario, $tipoUsuario->descripcion);
         }
+        return $opciones;
     }
 
     public function generarOpcionesDeSeleccionDePersonas()
     {
         $query = $this->asistenteDB->obtenerDatosDePersonas();
 
+        $opciones = array();
         foreach ($query as $columna) {
-            echo new Opcion($columna->idPersona, $columna->apellido . " " . $columna->nombres);
+            $opciones[] =  new Opcion($columna->idPersona, $columna->apellido . " " . $columna->nombres);
         }
+        return $opciones;
     }
 
     public function generarTarjetaDeIdentificacionDeUsuario($idUsuario)
     {
 
         $consulta = $this->asistenteDB->obtenerDatosDeUsuarioPorId($idUsuario);
-
+        $tarjeta = array();
         foreach ($consulta as $usuario) {
-            echo "Identificado con: " . $usuario->nombres . " " . $usuario->apellido . new SaltoLinea();
-            echo "Nombre de usuario: " . $usuario->username . new SaltoLinea();
-            echo "Tipo: " . $usuario->descripcion . new SaltoLinea();
-            echo "Habilitado: " . $usuario->habilitado . new SaltoLinea();
+            $tarjeta[] =  new Texto("Identificado con: " . $usuario->nombres . " " . $usuario->apellido);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Nombre de usuario: " . $usuario->username);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Tipo: " . $usuario->descripcion);
+            $tarjeta[] = new SaltoLinea();
+            $tarjeta[] = new Texto("Habilitado: " . $usuario->habilitado);
+            $tarjeta[] = new SaltoLinea();
         }
+        return $tarjeta;
     }
 
 

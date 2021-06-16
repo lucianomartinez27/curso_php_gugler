@@ -1,5 +1,7 @@
 <?php
 include_once('../includes/php/generadorHTMLUsuarios.php');
+include_once('../../includes/mensaje_abm.php');
+
 // verificamos que se haya pasado un id por GET, sino redirigimos
 if (!isset($_GET['id'])) {
     header('Location: ./listado_usuarios.php' . $idUsuario);
@@ -13,6 +15,8 @@ if (!isset($_GET['id'])) {
     <link rel="stylesheet" href="../../css/styles.css">
     <!-- Aquí importo un framework de css muy sencillo -->
     <link rel="stylesheet" href="https://unpkg.com/chota">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,50 +27,36 @@ if (!isset($_GET['id'])) {
 <body>
     <?php
     include_once("../../includes/header.php");
+    $tarjeta = new Columna([
+        new Fila([
+            new Negrita([new Texto('Estado Actual:')])
+        ]),
+        new Fila($generadorHTMLUsuarios->generarTarjetaDeIdentificacionDeUsuario($_GET['id']))
+    ]);
+
+    $form =
+        [
+            new Label('person', 'Identificación de persona'), new Select('person', $generadorHTMLUsuarios->generarOpcionesDeSeleccionDePersonas()),
+            new Label('type_user', 'Tipo usuario'), new Select('type_user', $generadorHTMLUsuarios->generarOpcionesDeTipoDeUsuario()),
+            new Texto('HABILITADO: '), new Texto('SI: '), new InputRadio('S', 'enabled'), new Texto('NO: '), new InputRadio('N', 'enabled'), new SaltoLinea,
+            new Input('', '', 'reset', 'Limpiar'),
+            new Input('', '', 'submit', 'Agregar')
+        ];
+
+    echo new Division([
+        new Fila([
+            new Columna([
+                new MensajeAbm($tarjeta, "../listado_usuarios.php")
+            ]),
+            new Columna([new Fieldset([
+                new Legend('Modificar persona'),
+                new Form($form, "../includes/php/abm/modificacion_usuario.php?id=" . $_GET['id'])
+            ])])
+        ])
+    ]);
+
     ?>
 
-    <div class="container">
-        <div class="row">
-            <div class="col is-vertical-align">
-                <div class="card">
-                    <p>Estado actual:</p>
-                    <?php
-                    // Generador de HTML es una clase que se encarga de generar 
-                    // contenido que va a ser utilizado en más de una oportunidad
-                    $generadorHTMLUsuarios->generarTarjetaDeIdentificacionDeUsuario($_GET['id']);
-                    ?>
-                </div>
-            </div>
-            <div class="col">
-                <fieldset id="form__input">
-                    <legend>Modificar usuario</legend>
-                    <form action=<?php echo "../includes/php/abm/modificacion_usuario.php?id=" . $_GET['id'] . " method='post'" ?>>
-
-                        <label for="person">Identificación de persona:</label>
-                        <select name="person" id="">
-                            <?php
-                            $generadorHTMLUsuarios->generarOpcionesDeSeleccionDePersonas();
-                            ?>
-                        </select>
-                        <label for="type_user">Tipo usuario:</label>
-                        <select name="type_user" id="">
-                            <?php
-                            $generadorHTMLUsuarios->generarOpcionesDeTipoDeUsuario()
-                            ?>
-                        </select>
-                        <label for="enabled">Habilitado: </label>
-                        <input type="radio" name="enabled" value="S" id="" required=true> SI
-                        <input type="radio" name="enabled" value="N" id="" required=true> NO
-                        <br>
-                        <input type="reset" value="Limpiar" class="button error">
-                        <input class="button success" type="submit" value="Modificar">
-
-                    </form>
-            </div>
-        </div>
-        </fieldset>
-        <a class=" is-center button" href="../listado_usuarios.php">Volver</a>
-    </div>
     <?php
     include_once("../../includes/footer.php");
     echo new MiFooter;

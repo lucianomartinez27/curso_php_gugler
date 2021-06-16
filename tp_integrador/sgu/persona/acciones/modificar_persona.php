@@ -1,6 +1,8 @@
 <?php
 include_once('../includes/php/generadorHTMLPersonas.php');
 include_once('../../includes/mensaje_abm.php');
+include_once("../../includes/footer.php");
+
 
 // verificamos que se haya pasado un id por GET, sino redirigimos
 if (!isset($_GET['id'])) {
@@ -60,16 +62,10 @@ if (!isset($_GET['id'])) {
                  new Form($form, "../includes/php/abm/modificacion_persona.php?id=".$_GET['id'])])])])]);
     $boton = new Boton('../listado_personas.php', 'Volver');
     echo $boton -> agregar_clase('is-center');
-    ?>
 
-    </div>
-    <div class="bottom">
-    <?php
-include_once("../../includes/footer.php");
     $footer = new MiFooter;
     $footer -> agregar_atributo('style', 'position: static;');
     echo $footer;    ?>
-    </div>
    
 </body>
 

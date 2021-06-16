@@ -1,5 +1,7 @@
 <?php
 include_once('../includes/php/generadorHTMLUsuarios.php');
+include_once('../../includes/mensaje_abm.php');
+include_once('../../includes/footer.php');
 
 $idUsuario = $_GET['id'];
 ?>
@@ -20,32 +22,25 @@ $idUsuario = $_GET['id'];
 <body>
     <?php
     include_once("../../includes/header.php");
-    include_once("../../includes/cabecera_usuario.php")
+    include_once("../../includes/cabecera_usuario.php");
+    echo  new Centrado([
+        new Fila([
+            new Columna([new MensajeAbm(
+                new Columna([
+                    new Fila([
+                        new Negrita([new Texto('Estado Actual:')])
+                    ]),
+                    new Fila($generadorHTMLUsuarios->generarTarjetaDeIdentificacionDeUsuario($_GET['id']))
+                ]),
+                '../listado_usuarios.php'
+            )]),
+            new Centrado([new Columna([new Texto('¿Está seguro de que desea borrar el usuario?'),
+            new Centrado([new Fila([new Boton("../includes/php/abm/baja_usuario.php?id=". $idUsuario, 'Borrar')])])])])
+        ])
+    ]);
+    echo new MiFooter;
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
-                $generadorHTMLUsuarios->generarTarjetaDeIdentificacionDeUsuario($_GET['id']);
-                ?>
-            </div>
-        </div>
-        <br>
-    </div>
-    <div class="row is-center">
-        <p>¿Está seguro de que desea borrar el usuario?</p><br>
-    </div>
-    <div class="row is-center">
-        <a class="is-center button" href="../listado_usuarios.php">Volver</a>
-        <a class="is-center button error" href=<?php echo "../includes/php/abm/baja_usuario.php?id=" . $idUsuario; ?>>Borrar</a>
-    </div>
-        <?php
-        include_once("../../includes/footer.php")
-        ?>
+   
 </body>
 
 </html>

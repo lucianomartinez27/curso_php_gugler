@@ -1,8 +1,11 @@
 <?php
 include_once('../includes/php/generadorHTMLPersonas.php');
+include_once('../../includes/mensaje_abm.php');
+include_once('../../includes/footer.php');
+
 if (!isset($_GET['id'])) {
     header('Location: ../../../listar_personas.php');
-}else {
+} else {
     $idPersona = $_GET['id'];
 }
 ?>
@@ -23,35 +26,28 @@ if (!isset($_GET['id'])) {
 <body>
     <?php
     include_once("../../includes/header.php");
-    include_once("../../includes/cabecera_usuario.php")
+    include_once("../../includes/cabecera_usuario.php");
+    echo  new Centrado([
+        new Fila([
+            new Columna([new MensajeAbm(
+                new Columna([
+                    new Fila([
+                        new Negrita([new Texto('Estado Actual:')])
+                    ]),
+                    new Fila($generadorHTMLPersonas->generarTarjetaDeIdentificacionDePersona($_GET['id']))
+                ]),
+                '../listado_personas.php'
+            )]),
+            new Centrado([new Columna([new Texto('¿Está seguro de que desea borrar la persona?'),
+            new Centrado([new Fila([new Boton("../includes/php/abm/baja_persona.php?id=". $idPersona, 'Borrar')])])])])
+        ])
+    ]);
+    echo new MiFooter;
+
+
     ?>
-    <br>
-    <div class="col">
-        <div class="row is-center">
-            <div class="card">
-                <div class="col is-center">
-                    <p class="material-icons" style="font-size: 150px;">person</p>
-                </div>
-                <?php
-                $generadorHTMLPersonas->generarTarjetaDeIdentificacionDePersona($_GET['id']);
-                ?>
-            </div>
-        </div>
-        <br>
-        <div class="row is-center">
-            <p>¿Está seguro de que desea borrar la persona?</p><br>
-        </div>
-        <div class="row is-center">
-            <a class="is-center button" href="../listado_personas.php">Volver</a>
-            <a class="is-center button bg-error text-white"
-            href=<?php echo "../includes/php/abm/baja_persona.php?id=" . $idPersona; ?>>Borrar</a>
-        </div>
-    </div>
-    <div class="bottom">
-    <?php
-    include_once('../../includes/footer.php');
-    ?>
-    </div>
+
+        
 </body>
 
 </html>
